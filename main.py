@@ -1,16 +1,21 @@
 import random
 
 symbols = 'ABCDEFGH'
+symbols = list(symbols)
 
 board = {}
 
-
+# TODO: Fix this function!!! Actually it doesn't work good!= :(
 def generate_board(symbols):
-    key = 1
-    for symbol in range(len(symbols)):
+    key = 10
+    for board_field in range(2*len(symbols)):
         symbol = random.choice(symbols)
-        while symbol in board.values():
-            symbol = random.choice(symbols)
+        if symbol in board.values():
+            if value_counter(symbol, board) < 2:
+                pass
+            else:
+                symbols.remove(symbol)
+                symbol = random.choice(symbols)
         board[f'{key}'] = symbol
         key += 1
         print(board)
@@ -26,12 +31,19 @@ def value_counter(symbol, board):
 
 
 def print_board(board):
-    pass
+    column_counter = 0
+    for key, value in board.items():
+        print(f'{key}:{value}   ', end="")
+        column_counter += 1
+        if column_counter == 4:
+            print("")
+            column_counter = 0
 
 
 def get_choice():
     first_choice = 9 #int(input('First choice: '))
     second_choice = 8 #int(input('Second input: '))
+    print("")
     return first_choice, second_choice
 
 
@@ -51,9 +63,18 @@ if __name__ == '__main__':
     modify_board(verification, board)
     print_board(board)
 
-    board['9'] = 'A'
-
     print('\n')
-    print(board)
-    licznik = value_counter('A', board)
-    print(licznik)
+    print('A:', value_counter('A', board))
+    print('B:', value_counter('B', board))
+    print('C:', value_counter('C', board))
+    print('D:', value_counter('D', board))
+    print('E:', value_counter('E', board))
+    print('F:', value_counter('F', board))
+    print('G:', value_counter('G', board))
+    print('H:', value_counter('H', board))
+
+
+    print(symbols)
+
+
+
