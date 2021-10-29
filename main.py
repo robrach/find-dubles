@@ -7,7 +7,7 @@ board = {}
 
 # TODO: Fix this function!!! Actually it doesn't work good!= :(
 def generate_board(symbols):
-    key = 10
+    key = 11
     for board_field in range(2*len(symbols)):
         symbol = random.choice(symbols)
         if symbol in board.values():
@@ -18,6 +18,8 @@ def generate_board(symbols):
                 symbol = random.choice(symbols)
         board[f'{key}'] = symbol
         key += 1
+        if key % 10 == 5:
+            key = key + 10 - 4
         print(board)
     return board
 
