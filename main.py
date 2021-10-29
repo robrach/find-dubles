@@ -2,11 +2,6 @@ import random
 
 symbols = 'ABCDEFGH'
 
-i = 1
-for symbol in range(len(symbols)):
-    print(i, random.choice(symbols))
-    i += 1
-
 board = {}
 
 
@@ -16,8 +11,18 @@ def generate_board(symbols):
         symbol = random.choice(symbols)
         while symbol in board.values():
             symbol = random.choice(symbols)
-        board[f'{i}'] = symbol
+        board[f'{key}'] = symbol
         key += 1
+        print(board)
+    return board
+
+
+def value_counter(symbol, board):
+    counter = 0
+    for value in board.values():
+        if value == symbol:
+            counter += 1
+    return counter
 
 
 def print_board(board):
@@ -25,8 +30,8 @@ def print_board(board):
 
 
 def get_choice():
-    first_choice = int(input('First choice: '))
-    second_choice = int(input('Second input: '))
+    first_choice = 9 #int(input('First choice: '))
+    second_choice = 8 #int(input('Second input: '))
     return first_choice, second_choice
 
 
@@ -46,4 +51,9 @@ if __name__ == '__main__':
     modify_board(verification, board)
     print_board(board)
 
+    board['9'] = 'A'
 
+    print('\n')
+    print(board)
+    licznik = value_counter('A', board)
+    print(licznik)
