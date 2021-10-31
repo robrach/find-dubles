@@ -1,27 +1,16 @@
 import random
 
-keys = 'ABCDEFGHIJKLMNOPQRSTUWXYZ'
-symbols = '!@#$%&<>?{}+'
-symbols = list(symbols)
+keys = 'ABCDEFGHIJKLMNOPQRSTUWXY'
+symbols = 2*list('!@#$%&<>?{}+')
+symbols = 2 * symbols
 
 board = {}
 
-# TODO: Fix this function!!! Actually it doesn't work good!= :(
-def generate_board(symbols):
-    i = 0
-
-    for board_field in range(2*len(symbols)):
-        key = keys[i]
+def generate_board():
+    for key in keys:
         symbol = random.choice(symbols)
-        if symbol in board.values():
-            if value_counter(symbol, board) < 2:
-                pass
-            else:
-                symbols.remove(symbol)
-                symbol = random.choice(symbols)
-        board[f'{key}'] = symbol
-        i += 1
-        print(board)
+        board[key] = symbol
+        symbols.remove(symbol)
     return board
 
 
@@ -66,7 +55,7 @@ def temporaty_print_counted_values(board):
 
 
 if __name__ == '__main__':
-    board = generate_board(symbols)
+    board = generate_board()
     print_board(board)
     choice = get_choice()
     verification = check_choice(choice)
@@ -76,6 +65,7 @@ if __name__ == '__main__':
 
 
     print(symbols)
+    print(board)
 
 
 
