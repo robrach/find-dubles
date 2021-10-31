@@ -1,14 +1,17 @@
 import random
 
-symbols = 'ABCDEFGH'
+keys = 'ABCDEFGHIJKLMNOPQRSTUWXYZ'
+symbols = '!@#$%&<>?{}+'
 symbols = list(symbols)
 
 board = {}
 
 # TODO: Fix this function!!! Actually it doesn't work good!= :(
 def generate_board(symbols):
-    key = 11
+    i = 0
+
     for board_field in range(2*len(symbols)):
+        key = keys[i]
         symbol = random.choice(symbols)
         if symbol in board.values():
             if value_counter(symbol, board) < 2:
@@ -17,9 +20,7 @@ def generate_board(symbols):
                 symbols.remove(symbol)
                 symbol = random.choice(symbols)
         board[f'{key}'] = symbol
-        key += 1
-        if key % 10 == 5:
-            key = key + 10 - 4
+        i += 1
         print(board)
     return board
 
@@ -37,7 +38,7 @@ def print_board(board):
     for key, value in board.items():
         print(f'{key}:{value}   ', end="")
         column_counter += 1
-        if column_counter == 4:
+        if column_counter == 5:
             print("")
             column_counter = 0
 
@@ -57,23 +58,21 @@ def modify_board(verification, board):
     pass
 
 
+def temporaty_print_counted_values(board):
+    symbols = '!@#$%&<>?{}+'
+    for symbol in symbols:
+        counted_value = value_counter(symbol, board)
+        print(f'{symbol}: {counted_value}')
+
+
 if __name__ == '__main__':
     board = generate_board(symbols)
     print_board(board)
     choice = get_choice()
     verification = check_choice(choice)
     modify_board(verification, board)
-    print_board(board)
-
-    print('\n')
-    print('A:', value_counter('A', board))
-    print('B:', value_counter('B', board))
-    print('C:', value_counter('C', board))
-    print('D:', value_counter('D', board))
-    print('E:', value_counter('E', board))
-    print('F:', value_counter('F', board))
-    print('G:', value_counter('G', board))
-    print('H:', value_counter('H', board))
+    # print_board(board)
+    temporaty_print_counted_values(board)
 
 
     print(symbols)
