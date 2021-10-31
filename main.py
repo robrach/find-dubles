@@ -1,8 +1,10 @@
 import random
 
-keys = 'ABCDEFGHIJKLMNOPQRSTUWXY'
+keys = 'ABCDEFGHIJKLMNOPQRSTUWXY'.lower()
 symbols = 2*list('!@#$%&<>?{}+')
 board = {}
+dubles = int(len(symbols)/2)
+found_dubles = 0
 
 
 def generate_board(symbols):
@@ -24,29 +26,40 @@ def print_board(board):
 
 
 def get_choice():
-    first_choice = 9 #int(input('First choice: '))
-    second_choice = 8 #int(input('Second input: '))
     print("")
-    return first_choice, second_choice
+    first_choice = input('First choice: ')
+    second_choice = input('Second choice: ')
+    if first_choice == second_choice:
+        print("You can't input the same first and second choice! Input again.")
+        get_choice()
+    return first_choice.lower(), second_choice.lower()
 
 
 def check_choice(choice):
-    pass
+    global found_dubles
+
+    if board[choice[0]] == " " and board[choice[1]] == " ":
+        print("Both are empty. You already found them earlier.")
+    elif board[choice[0]] == board[choice[1]]:
+        print("Good!")
+        found_dubles += 1
+        modify_board(choice)
+    else:
+        print("Bad choice...")
+
+    print(f'\nStatus: {found_dubles}/{dubles}')
 
 
-def modify_board(verification, board):
-    pass
+def modify_board(choice):
+    board[choice[0]], board[choice[1]] = " ", " "
 
 
 if __name__ == '__main__':
     board = generate_board(symbols)
-    print_board(board)
-    choice = get_choice()
-    verification = check_choice(choice)
-    modify_board(verification, board)
-
-    print(symbols)
-    print(board)
+    while found_dubles < dubles:
+        print_board(board)
+        choice = get_choice()
+        check_choice(choice)
 
 
 
