@@ -2,24 +2,15 @@ import random
 
 keys = 'ABCDEFGHIJKLMNOPQRSTUWXY'
 symbols = 2*list('!@#$%&<>?{}+')
-symbols = 2 * symbols
-
 board = {}
 
-def generate_board():
+
+def generate_board(symbols):
     for key in keys:
         symbol = random.choice(symbols)
         board[key] = symbol
         symbols.remove(symbol)
     return board
-
-
-def value_counter(symbol, board):
-    counter = 0
-    for value in board.values():
-        if value == symbol:
-            counter += 1
-    return counter
 
 
 def print_board(board):
@@ -47,22 +38,12 @@ def modify_board(verification, board):
     pass
 
 
-def temporaty_print_counted_values(board):
-    symbols = '!@#$%&<>?{}+'
-    for symbol in symbols:
-        counted_value = value_counter(symbol, board)
-        print(f'{symbol}: {counted_value}')
-
-
 if __name__ == '__main__':
-    board = generate_board()
+    board = generate_board(symbols)
     print_board(board)
     choice = get_choice()
     verification = check_choice(choice)
     modify_board(verification, board)
-    # print_board(board)
-    temporaty_print_counted_values(board)
-
 
     print(symbols)
     print(board)
