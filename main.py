@@ -1,6 +1,6 @@
 import random
 
-keys = 'ABCDEFGHIJKLMNOPQRSTUWXY'.lower()
+keys = 'abcdefghijklmnopqrstuwxy'
 symbols = 2*list('!@#$%&<>?{}+')
 board = {}
 dubles = int(len(symbols)/2)
@@ -36,12 +36,12 @@ def example(board):
 
 def get_choice():
     print("")
-    first_choice = input('FIRST CHOICE: ')
-    second_choice = input('SECOND CHOICE: ')
+    first_choice = input('FIRST CHOICE: ').lower()
+    second_choice = input('SECOND CHOICE: ').lower()
     if first_choice == second_choice:
         print("You can't input the same first and second choice! Input again.")
         get_choice()
-    return first_choice.lower(), second_choice.lower()
+    return first_choice, second_choice
 
 
 def check_choice(choice):
